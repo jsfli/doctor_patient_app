@@ -1,1 +1,76 @@
-<h1>Index Page</h1>
+<h1>Doctor Patient App Admin page</h1>
+
+<h4>Add a new specialty: </h4>
+
+<form action="/specialtys" method="post">
+  <label for="name">Specialty name:</label>
+  <input type="text" name="name" id="name">
+  <button type="submit">Add Specialty</button>
+</form>
+
+<hr>
+
+<h4>Add a new doctor: </h4>
+
+<form action="/doctors" method="post">
+
+  <label for="specialty_id">Select a Specialty:</label>
+  <select id='specialty_id' name="specialty_id" type="text">
+    <% @specialtys.each() do |specialty| %>
+      <option value="<%= specialty.id() %>"> <%= specialty.name() %> </option>
+    <% end %>
+  </select>
+
+  <label for="name">Doctor's name:</label>
+    <input id="name" name="name" type="text">
+  <button type="submit">Add Doctor</button>
+</form>
+
+<hr>
+
+<h4>Add a new patient: </h4>
+
+<form action="/patients" method="post">
+
+  <label for="doctor_id">Select a Doctor:</label>
+  <select id='doctor_id' name="doctor_id" type="text">
+    <% @doctors.each() do |doctor| %>
+      <option value="<%= doctor.id() %>"> <%= doctor.name() %> </option>
+    <% end %>
+  </select>
+
+  <label for="name">Patient's name:</label>
+    <input id="name" name="name" type="text">
+
+  <label for="birthdate">Patient's name:</label>
+    <input id="birthdate" name="birthdate" type="YYYY-MM-DD" placeholder="YYYY-MM-DD">
+  <button type="submit">Add Patient</button>
+</form>
+
+<hr>
+
+<h4>Click on a specialty to see the list of doctors</h4>
+
+<% if @specialtys.any?() %>
+  <ul>
+    <% @specialtys.each() do |specialty| %>
+    <li><a href="/specialtys/<%=specialty.id()%>"><%= specialty.name()%></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no specialties on the list yet!</p>
+<% end %>
+
+<hr>
+
+<h4>Click on a doctor to see the list of patients</h4>
+
+<% if @doctors.any?() %>
+  <ul>
+    <% @doctors.each() do |doctor| %>
+    <li><a href="/doctors/<%=doctor.id()%>"><%= doctor.name()%></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no doctors on the list yet!</p>
+<% end %>

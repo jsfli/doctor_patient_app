@@ -1,0 +1,20 @@
+<h1><%= @doctor.name() %></h1>
+
+<h4>Here is the list of patients assigned to <%=@doctor.name()%>:</h4>
+
+<% if @doctor.patients().any? %>
+
+
+<ul>
+  <% @doctor.patients().each() do |patient| %>
+    <li><%=patient.name()%></li>
+  <%end%>
+</ul>
+
+<% else %>
+  <p>There are no patients on this list!</p>
+<% end %>
+
+<div class="container">
+    <p><a href="/">Return to Main Page</a></p>
+</div>

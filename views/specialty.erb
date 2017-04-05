@@ -1,0 +1,22 @@
+<h1><%=@specialty.name()%></h1>
+
+<h4>Here is the list of doctors in this specialty:</h4>
+
+<% if @specialty.doctors().any?() %>
+
+  <h5>click on individual doctor to see list of patients</h5>
+
+<ul>
+  <% @specialty.doctors().each() do |doctor| %>
+  <li><a href="/doctors/<%=doctor.id()%>"><%= doctor.name()%></a></li>
+  <%end%>
+</ul>
+
+<% else %>
+  <p>There are no doctors on this list!</p>
+<% end %>
+
+<div class="container">
+   <!-- <p><a href="/specialtys/<%=@specialty.id()%>/edit">Edit <%= @specialty.name() %></a></p> -->
+    <p><a href="/">Return to Main Page</a></p>
+</div>
