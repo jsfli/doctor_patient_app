@@ -50,10 +50,10 @@ class Patient
     @id = self.id()
     @name = attributes.fetch(:name, @name)
     @birthdate = attributes.fetch(:birthdate, @birthdate)
-    @doctor_id = self.doctor_id()
+    @doctor_id = attributes.fetch(:doctor_id, @doctor_id)
     # DB.exec("UPDATE patients SET name ='#{@name}' WHERE id=#{@id};")
     # DB.exec("UPDATE patients SET birthdate ='#{@birthdate}' WHERE id=#{@id};")
-    DB.exec("UPDATE patients SET name='#{@name}', birthdate='#{@birthdate}' WHERE id=#{@id};")
+    DB.exec("UPDATE patients SET name='#{@name}', birthdate='#{@birthdate}', doctor_id=#{@doctor_id} WHERE id=#{@id};")
   end
 
   define_method(:delete) do

@@ -56,10 +56,10 @@ class Doctor
   end
 
   define_method(:update) do |attributes|
-    @name = attributes.fetch(:name, @name)
     @id = self.id()
-    @specialty_id = self.specialty_id()
-    DB.exec("UPDATE doctors SET name ='#{@name}' WHERE id = #{@id};")
+    @name = attributes.fetch(:name, @name)
+    @specialty_id = attributes.fetch(:specialty_id, @specialty_id)
+    DB.exec("UPDATE doctors SET name ='#{@name}', specialty_id=#{@specialty_id} WHERE id = #{@id};")
   end
 
   define_method(:delete) do
