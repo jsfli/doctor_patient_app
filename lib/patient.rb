@@ -36,5 +36,28 @@ class Patient
     self.doctor_id().==(another_patient.doctor_id())
   end
 
+  define_singleton_method(:find) do |id|
+    found_patient = nil
+    Patient.all().each() do |patient|
+      if patient.id().==(id)
+        found_patient = patient
+      end
+    end
+    found_patient
+  end
+
+  define_method(:update) do |attributes|
+    @id = self.id()
+    @name = attributes.fetch(:name, @name)
+    @birthdate = attributes.fetch(:birthdate, @birthdate)
+    @doctor_id = self.doctor_id()
+    # DB.exec("UPDATE patients SET name ='#{@name}' WHERE id=#{@id};")
+    # DB.exec("UPDATE patients SET birthdate ='#{@birthdate}' WHERE id=#{@id};")
+    DB.exec("UPDATE patients SET name='#{@name}', birthdate='#{@birthdate}' WHERE id=#{@id};")
+  end
+
+  define_method(:delete) do
+    DB.exec("DELETE FROM patients where id=#{self.id};")
+  end
 
 end #end of Patient class

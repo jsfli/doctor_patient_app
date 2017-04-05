@@ -35,4 +35,33 @@ describe(Patient) do
       expect(test_patient1).to(eq(test_patient2))
     end
   end
+
+  describe('.find') do
+    it('returns a patient by its id') do
+      @test_patient.save()
+      test_patient2 = Patient.new({:id => nil, :name => "Patient 2", :birthdate => '2011-10-29', :doctor_id => 1})
+      test_patient2.save()
+      expect(Patient.find(test_patient2.id())).to(eq(test_patient2))
+    end
+  end
+
+  describe('#update') do
+    it('lets you update the patient details in the database') do
+      @test_patient.save()
+      @test_patient.update({:name => "Patient 2"})
+      @test_patient.update({:birthdate => "2011-10-29"})
+      expect(@test_patient.name()).to(eq('Patient 2'))
+      expect(@test_patient.birthdate()).to(eq("2011-10-29"))
+    end
+  end
+
+  describe('#delete') do
+    it('lets you delete a patient from the database') do
+      @test_patient.save()
+      test_patient2 = Patient.new({:id => nil, :name => "Patient 2", :birthdate => '2010-12-29', :doctor_id => 2})
+      test_patient2.save()
+      @test_patient.delete()
+      expect(Patient.all()).to(eq([test_patient2]))
+    end
+  end
 end #end of Patient describe

@@ -13,6 +13,12 @@ describe(Specialty) do
     end
   end
 
+  describe('.all') do
+    it('the specialty list should be empty at first') do
+      expect(Specialty.all()).to(eq([]))
+    end
+  end
+
   describe('#==') do
     it('is the same specialty if it has the same parameters') do
       test_specialty2 = Specialty.new({:id=>nil, :name=>'Specialty 1'})
@@ -55,7 +61,7 @@ describe(Specialty) do
     end
   end
 
-  describe('@delete') do
+  describe('#delete') do
     it('lets you delete a specialty from the database') do
       @test_specialty.save()
       test_specialty2 = Specialty.new({:id=>nil, :name=>'Specialty 1'})
