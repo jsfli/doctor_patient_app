@@ -30,8 +30,9 @@ describe(Patient) do
 
   describe('#==') do
     it("is the same patient if it has the same parameters") do
+      test_patient1 = Patient.new({:id => nil, :name => "Patient 1", :birthdate => '2010-10-29', :doctor_id => 1})
       test_patient2 = Patient.new({:id => nil, :name => "Patient 1", :birthdate => '2010-10-29', :doctor_id => 1})
-      expect(@test_patient).to(eq(test_patient2))
+      expect(test_patient1).to(eq(test_patient2))
     end
   end
 end #end of Patient describe
