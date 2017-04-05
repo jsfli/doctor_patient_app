@@ -53,4 +53,22 @@ describe(Doctor) do
       expect(@test_doctor.patients()).to(eq([test_patient, test_patient2]))
     end
   end
+
+  describe('#update') do
+    it('lets you update the doctor name in the database') do
+      @test_doctor.save()
+      @test_doctor.update({:name => 'Doctor 2'})
+      expect(@test_doctor.name()).to(eq('Doctor 2'))
+    end
+  end
+
+  describe('#delete') do
+    it('lets you delete a doctor from the database') do
+      @test_doctor.save()
+      test_doctor2 = Doctor.new({:id=>nil, :name=>"Doctor 2", :specialty_id => 1})
+      test_doctor2.save()
+      @test_doctor.delete()
+      expect(Doctor.all()).to(eq([test_doctor2]))
+    end
+  end
 end #end of describe Doctor class

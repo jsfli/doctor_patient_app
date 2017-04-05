@@ -55,4 +55,16 @@ class Doctor
     doctor_patients
   end
 
+  define_method(:update) do |attributes|
+    @name = attributes.fetch(:name, @name)
+    @id = self.id()
+    @specialty_id = self.specialty_id()
+    DB.exec("UPDATE doctors SET name ='#{@name}' WHERE id = #{@id};")
+  end
+
+  define_method(:delete) do
+    DB.exec("DELETE FROM doctors WHERE id=#{self.id()};")
+
+  end
+
 end #end of Doctor class
